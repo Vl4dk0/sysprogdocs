@@ -1,13 +1,18 @@
-Part II
+   Part II
 
 Concurrency
 
-1
 
-25
-A Dialogue on Concurrency
 
-Professor: And thus we reach the second of our three pillars of operating systems: concurrency.
+
+      1
+                                                                                      25
+
+                                A Dialogue on Concurrency
+
+
+Professor: And thus we reach the second of our three pillars of operating sys-
+tems: concurrency.
 Student: I thought there were four pillars...?
 Professor: Nope, that was in an older version of the book.
 Student: Umm... OK. So what is concurrency, oh wonderful professor?
@@ -33,11 +38,10 @@ Student: OK, let me think. Well, we used to have many people grabbing for
 peaches all at once, which is faster. But in my way, we just go one at a time,
 which is correct, but quite a bit slower. The best kind of approach would be fast
 and correct, probably.
-3
 
-4
+                                        3
+4                                           A D IALOGUE ON C ONCURRENCY
 
-A D IALOGUE ON C ONCURRENCY
 
 Professor: You are really starting to impress. In fact, you just told us everything
 we need to know about concurrency! Well done.
@@ -53,16 +57,17 @@ as expected. Make sense?
 Student: Kind of. But why do we talk about this in an OS class? Isn’t that just
 application programming?
 Professor: Good question! A few reasons, actually. First, the OS must support
-multi-threaded applications with primitives such as locks and condition variables, which we’ll talk about soon. Second, the OS itself was the first concurrent
+multi-threaded applications with primitives such as locks and condition vari-
+ables, which we’ll talk about soon. Second, the OS itself was the first concurrent
 program — it must access its own memory very carefully or many strange and
 terrible things will happen. Really, it can get quite grisly.
 Student: I see. Sounds interesting. There are more details, I imagine?
 Professor: Indeed there are...
 
+
+
+
 O PERATING
-S YSTEMS
+S YSTEMS                         WWW. OSTEP. ORG
 [V ERSION 1.10]
-
-WWW. OSTEP. ORG
-
 

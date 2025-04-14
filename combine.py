@@ -16,21 +16,26 @@ def cleanup(data: str):
     # Filter to keep only printable characters and newlines
     printable_content = "".join(c for c in data if c.isprintable() or c == "\n")
 
-    # Remove lines with a few characters
-    lines = printable_content.splitlines()
-    lines = [str(line) for line in lines if len(line) > 2 or len(line) == 0]
+    # NOTE: This is unnecessary since we switched to `pdftotext -layout ...` as it generates
+    # much better output by default
 
-    i = len(lines) - 1
-    while i >= 0:
-        if i >= 2:
-            prev_newline = lines[i - 1] == ""
-            prev_prev_newline = lines[i - 2] == ""
-            if prev_newline and prev_prev_newline:
-                lines.pop(i)
-        i -= 1
+    # # Remove lines with a few characters
+    # lines = printable_content.splitlines()
+    # lines = [str(line) for line in lines if len(line) > 2 or len(line) == 0]
+    #
+    # i = len(lines) - 1
+    # while i >= 0:
+    #     if i >= 2:
+    #         prev_newline = lines[i - 1] == ""
+    #         prev_prev_newline = lines[i - 2] == ""
+    #         if prev_newline and prev_prev_newline:
+    #             lines.pop(i)
+    #     i -= 1
+    #
+    # filtered_content = "\n".join(lines)
+    # return filtered_content
 
-    filtered_content = "\n".join(lines)
-    return filtered_content
+    return printable_content
 
 
 def main():
