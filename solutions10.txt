@@ -1,0 +1,151 @@
+**Kvíz 1**
+
+1.  **Question:** What does FTL mean (regarding storage devices)?
+    **Correct Answer:** d. Flash Translation Layer
+    **Basis:** Based on provided material (OSTEP Ch 44.5).
+
+2.  **Question:** What does wear levelling on an SSD mean?
+    **Correct Answer:** The process of spreading write and erase cycles evenly across all flash blocks to prevent premature failure of specific blocks and extend the overall SSD lifetime.
+    **Basis:** Based on provided material (OSTEP Ch 44.5, 44.10).
+
+3.  **Question:** What is write amplification?
+    **Correct Answer:** The ratio of the total data written to the flash memory by the FTL to the amount of data written by the host system. It represents the extra writes required due to internal SSD operations like garbage collection and wear leveling.
+    **Basis:** Based on provided material (OSTEP Ch 44.5).
+
+4.  **Question:** State two problems with direct mapped approached to FTL.
+    **Correct Answer:** 1. Severe write amplification, leading to poor write performance because entire blocks must be read, erased, and reprogrammed for small writes. 2. Poor reliability due to uneven wear, as frequently updated logical blocks wear out the same physical blocks quickly.
+    **Basis:** Based on provided material (OSTEP Ch 44.6).
+
+5.  **Question:** What does the trim operation on an SSD do?
+    **Correct Answer:** It informs the SSD controller that specific logical blocks are no longer in use by the file system and can be marked as invalid. This allows the SSD to skip moving the data in those blocks during garbage collection, improving performance and endurance.
+    **Basis:** Based on provided material (OSTEP Ch 44.8 Aside).
+
+6.  **Question:** Modern USB flash drives are fast... until you fill them up almost to capacity, then they start to be slow... Explain why.
+    **Correct Answer:** As a flash drive nears capacity, there are fewer free (erased) blocks available. This forces the controller to perform more garbage collection (reading valid data from partially filled blocks, erasing them, and writing the valid data back along with new data), which significantly increases write amplification and reduces overall write performance.
+    **Basis:** Based on provided material (OSTEP Ch 44 principles of GC and write amplification).
+
+7.  **Question:** The 1TB Samsung 970 evo SSD disk has a "600 TBW" guarantee. If you want the disk to last 5 years, how much data at most per day can you write to it?
+    **Correct Answer:** The maximum daily write amount is the total TBW divided by the total number of days in the desired lifespan. Calculation: \( \frac{600 \text{ TB}}{5 \text{ years} \times 365 \text{ days/year}} \approx 0.3287 \text{ TB/day} \). This is approximately \( 329 \) GB/day (using 1 TB = 1000 GB).
+    **Basis:** Calculation based on the definition of TBW (Terabytes Written) endurance rating. The concept itself is not detailed in the provided material.
+
+8.  **Question:** Name three disk failure modes / errors that can happened when working with storage.
+    **Correct Answer:** The provided material emphasizes: 1. Latent Sector Errors (LSEs - sectors become unreadable upon access). 2. Block Corruption (silent data corruption, wrong data returned without error). 3. Complete Disk Failure (fail-stop model).
+    **Basis:** Based on provided material (OSTEP Ch 45.1).
+
+9.  **Question:** What kinds of errors can we and which can't we detect with a XOR based checksum?
+    **Correct Answer:** XOR-based checksums can detect errors where an odd number of bits flip in a specific bit position across the data chunks being checksummed. They cannot detect errors where an even number of bits flip in the same position (e.g., two bits flipping in the same column). They are for error *detection*, not *correction*.
+    **Basis:** Based on provided material (OSTEP Ch 45.3).
+
+10. **Question:** What is a misdirected write?
+    **Correct Answer:** A failure mode where a storage controller writes data to the wrong physical location on the disk, even though the data itself might be correct and pass checksums if read from that wrong location.
+    **Basis:** Based on provided material (OSTEP Ch 45.5).
+
+11. **Question:** If we store an 8 byte checksum per 4kB (4096 bytes) block, what percentage of the drive capacity is taken by the checksums?
+    **Correct Answer:** The percentage is \( \frac{8 \text{ bytes}}{4096 \text{ bytes}} \times 100\% = \frac{1}{512} \times 100\% \approx 0.195\% \).
+    **Basis:** Calculation based on the question parameters. The provided material also states this typical overhead (OSTEP Ch 45.8).
+
+12. **Question:** How are checksums used in network communication?
+    **Correct Answer:** To detect data corruption during transmission. The sender calculates a checksum over the message data and sends it along with the message. The receiver recalculates the checksum on the received data and compares it to the received checksum. A mismatch indicates potential corruption.
+    **Basis:** Based on provided material (OSTEP Ch 48.2 Tip, Ch 45.3).
+
+13. **Question:** The following picture shows a communication exchange... Shortly explain what is going on: [Diagram shows msg->, <-ack, msg->, <-ack (lost)]
+    **Correct Answer:** The sender sends a message, and the receiver acknowledges it successfully. The sender then sends a second message, the receiver receives it and sends an acknowledgment, but this second acknowledgment is lost before reaching the sender.
+    **Basis:** Interpretation based on diagrams in provided material (OSTEP Ch 48, Fig 48.3, 48.5).
+
+14. **Question:** What problem can arise in the previous communication and how can it be solved?
+    **Correct Answer:** The problem is that the sender, not receiving the acknowledgment for the second message, will likely time out and retransmit it. The receiver will then receive the same message twice. This can be solved using sequence counters (or unique IDs) so the receiver can identify and discard duplicate messages while still acknowledging them.
+    **Basis:** Based on provided material (OSTEP Ch 48.3).
+
+15. **Question:** Shortly describe the difference between TCP and UDP.
+    **Correct Answer:** TCP (Transmission Control Protocol) is a reliable, connection-oriented protocol that guarantees ordered delivery of data using acknowledgments, timeouts, and sequence numbers. UDP (User Datagram Protocol) is an unreliable, connectionless protocol that offers minimal overhead ("lightweight") but does not guarantee delivery or order.
+    **Basis:** Based on provided material (OSTEP Ch 48.2, 48.3).
+
+16. **Question:** Shortly describe what an exponential back-off timeout scheme is and what it is used for.
+    **Correct Answer:** It's a strategy used in network communication where, after a timeout and failed retransmission attempt, the sender increases the timeout period (often exponentially, e.g., doubling it) before trying again. It's used to prevent network/server overload caused by excessive, rapid retransmissions, especially during congestion.
+    **Basis:** Based on provided material (OSTEP Ch 48.3 Tip).
+
+17. **Question:** In Remote Procedure Call (RPC), what is a stub generator and what is a stub?
+    **Correct Answer:** A stub generator is a tool (like a compiler) that takes an interface definition (listing functions, arguments, return types) and automatically generates the boilerplate code (stubs) needed for RPC. A stub (client stub or server stub) is the generated code that handles the marshaling (packing) and unmarshaling (unpacking) of arguments/results into/from messages, and interacts with the RPC run-time library to manage communication.
+    **Basis:** Based on provided material (OSTEP Ch 48.5).
+
+18. **Question:** Shortly describe what a function in a client stub will do when called?
+    **Correct Answer:** When a client calls a function in the client stub, the stub code will: 1. Create a message buffer. 2. Marshal (pack) the function identifier and arguments into the buffer. 3. Send the message to the server via the RPC run-time library. 4. Wait for the reply message. 5. Unmarshal (unpack) the return values from the reply buffer. 6. Return the results to the original caller.
+    **Basis:** Based on provided material (OSTEP Ch 48.5).
+
+---
+
+**Kvíz 2**
+
+1.  **Question:** Shortly describe what must be done when we want to change a couple of bytes (less than a page) on a solid state disk (SSD)?
+    **Correct Answer:** Flash memory pages cannot be overwritten directly. To modify data within a page, the FTL must perform a read-modify-write operation, typically: 1. Read the entire block containing the target page into memory. 2. Modify the page data in memory. 3. Write the *entire modified block* to a new, previously erased physical block. 4. Update the FTL's mapping tables to point the logical block address to the new physical block location. 5. Mark the original physical block as invalid (stale) for later garbage collection.
+    **Basis:** Based on provided material (OSTEP Ch 44.3, 44.7).
+
+2.  **Question:** What does a Flash translation layer on SSDs do?
+    **Correct Answer:** The FTL acts as an intermediary layer between the host OS and the raw flash memory. It translates logical block addresses (LBAs) from the host into physical addresses (pages/blocks) on the flash chips. It also manages the complexities of flash, including wear leveling, garbage collection, bad block management, and read/erase/program operations, presenting a standard block device interface.
+    **Basis:** Based on provided material (OSTEP Ch 44.5).
+
+3.  **Question:** Why is wear leveling needed on an SSD disk?
+    **Correct Answer:** Flash memory blocks have a finite number of erase/program cycles before they wear out. Wear leveling algorithms distribute these cycles evenly across all physical blocks in the SSD to prevent frequently written blocks from failing prematurely, thereby maximizing the endurance and lifespan of the entire drive.
+    **Basis:** Based on provided material (OSTEP Ch 44.5, 44.10).
+
+4.  **Question:** Why is garbage collection needed in a log based FTL?
+    **Correct Answer:** In a log-structured FTL, updates are written to new locations, marking the old data locations as invalid ("garbage"). Garbage collection is necessary to reclaim the physical blocks containing only (or mostly) invalid data. It copies any remaining valid data from these blocks to new locations and then erases the reclaimed blocks, making them available for future writes.
+    **Basis:** Based on provided material (OSTEP Ch 44.8).
+
+5.  **Question:** What does the trim operation on an SSD do?
+    **Correct Answer:** It informs the SSD controller that specific logical blocks are no longer in use by the file system and can be marked as invalid. This allows the SSD to skip moving the data in those blocks during garbage collection, improving performance and endurance.
+    **Basis:** Based on provided material (OSTEP Ch 44.8 Aside).
+
+6.  **Question:** How does SSD performance compare to HDD?
+    **Correct Answer:** SSDs offer significantly higher performance than HDDs, especially for random read and write operations due to the lack of mechanical parts (no seek or rotational delay). Sequential performance is also typically better on SSDs, but the difference is less dramatic. However, SSDs generally have a higher cost per gigabyte than HDDs.
+    **Basis:** Based on provided material (OSTEP Ch 44.11).
+
+7.  **Question:** The 1TB Samsung 970 evo SSD disk has a "600 TBW" guarantee. If you want the disk to last 5 years, how much data at most per day can you write to it?
+    **Correct Answer:** The maximum daily write amount is the total TBW divided by the total number of days in the desired lifespan. Calculation: \( \frac{600 \text{ TB}}{5 \text{ years} \times 365 \text{ days/year}} \approx 0.3287 \text{ TB/day} \). This is approximately \( 329 \) GB/day (using 1 TB = 1000 GB).
+    **Basis:** Calculation based on the definition of TBW endurance rating. The concept itself is not detailed in the provided material.
+
+8.  **Question:** Name three disk failure modes / errors that can happen when working with storage.
+    **Correct Answer:** The provided material emphasizes: 1. Latent Sector Errors (LSEs - sectors become unreadable upon access). 2. Block Corruption (silent data corruption, wrong data returned without error). 3. Complete Disk Failure (fail-stop model).
+    **Basis:** Based on provided material (OSTEP Ch 45.1).
+
+9.  **Question:** What is a Latent Sector Error?
+    **Correct Answer:** An error where a disk sector has become physically damaged or degraded, making its contents unreadable. The error is "latent" because it's only discovered when the system attempts to access that specific sector. The disk's firmware typically detects LSEs using Error Correcting Codes (ECC) and reports an I/O error to the host.
+    **Basis:** Based on provided material (OSTEP Ch 45.1, 45.2).
+
+10. **Question:** What are silent errors?
+    **Correct Answer:** Storage errors that occur without the storage device detecting and reporting them through normal error mechanisms (like ECC failure). Examples include block corruption (data altered but ECC still passes), misdirected writes (data written to the wrong location), and lost writes (write acknowledged but not persisted). They are particularly dangerous because the system may use corrupted data unknowingly.
+    **Basis:** Based on provided material (OSTEP Ch 45.1, 45.3, 45.5, 45.6).
+
+11. **Question:** What are checksums used for?
+    **Correct Answer:** Checksums are used to verify data integrity. They compute a small, fixed-size value from a block of data, which can later be recomputed and compared to the stored checksum value to detect if the data has been altered or corrupted.
+    **Basis:** Based on provided material (OSTEP Ch 45.3).
+
+12. **Question:** What are the disadvantages / overhead of using checksums?
+    **Correct Answer:** 1. **Space Overhead:** Checksums require additional storage space. 2. **Computation Overhead:** Calculating checksums consumes CPU cycles during reads and writes. 3. **Potential I/O Overhead:** Reading/writing checksums might require extra I/O if stored separately from data; background scrubbing also adds I/O load. 4. **Performance Trade-off:** More robust checksum algorithms often require more computation.
+    **Basis:** Based on provided material (OSTEP Ch 45.8, 45.3).
+
+13. **Question:** What is disk scrubbing?
+    **Correct Answer:** A background process where the storage system periodically reads all data blocks, recalculates their checksums, and compares them to the stored checksums. This proactively detects and often corrects silent data corruption (bit rot) and latent sector errors before the data is actively requested by an application.
+    **Basis:** Based on provided material (OSTEP Ch 45.7).
+
+14. **Question:** If you wanted to send a realtime video stream... where it doesn't matter if some packets are lost... would you use UDP or TCP? Why?
+    **Correct Answer:** UDP would be more suitable. Real-time video streaming prioritizes low latency and continuous flow. UDP's lower overhead and lack of retransmission delays for lost packets make it better for this, as occasional packet loss (causing minor visual artifacts) is often more acceptable than the potential delays introduced by TCP's reliability mechanisms.
+    **Basis:** Inferred from the properties of TCP and UDP described in the provided material (OSTEP Ch 48.2, 48.3).
+
+15. **Question:** The following picture shows a communication exchange... Shortly explain what is going on: [Diagram shows msg->X (lost), msg->, <-ack]
+    **Correct Answer:** The sender attempts to send a message, but the message is lost in transit (indicated by X). After a timeout (implied), the sender retransmits the message. This second attempt is successful, the receiver gets the message, and sends an acknowledgment (ack) back to the sender.
+    **Basis:** Interpretation based on diagrams in provided material (OSTEP Ch 48, Fig 48.4).
+
+16. **Question:** A sequence counter is used... How does a receiver decide, when to send an ack and when not (when using a sequence counter).
+    **Correct Answer:** The receiver maintains an expected sequence number. When a message arrives: If the message's sequence number matches the expected number, the receiver accepts the data, increments the expected number, and sends an ACK. If the sequence number is lower than expected (a duplicate), the receiver discards the data but still sends an ACK for that sequence number. ACKs are generally always sent for received packets to inform the sender, but the decision to accept the *data* depends on the sequence number matching the expected value.
+    **Basis:** Based on provided material (OSTEP Ch 48.3).
+
+17. **Question:** In Remote Procedure Call (RPC), what is a stub generator and what is a stub?
+    **Correct Answer:** A stub generator is a tool that takes an interface definition and automatically generates the code (stubs) needed for RPC. A stub (client or server) is the generated code that handles marshaling/unmarshaling of arguments/results and interacts with the RPC run-time library for communication.
+    **Basis:** Based on provided material (OSTEP Ch 48.5).
+
+18. **Question:** Shortly describe what steps the auto-generated rpc code on a server does?
+    **Correct Answer:** The auto-generated RPC code (server stub and run-time library interaction) on the server typically performs these steps upon receiving a request message: 1. Receives the incoming request message. 2. Unmarshals the message to extract the function identifier and arguments. 3. Calls the actual implemented server function corresponding to the identifier. 4. Waits for the function to complete and gets its return values. 5. Marshals the return values into a reply message. 6. Sends the reply message back to the client.
+    **Basis:** Based on provided material (OSTEP Ch 48.5).
+
+---
