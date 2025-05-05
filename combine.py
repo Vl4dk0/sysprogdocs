@@ -56,7 +56,11 @@ def main():
 
     files = dict()
     for file_path in all_files:
-        num, _ = file_path.split("-", maxsplit=1)
+        parts = file_path.split("-", maxsplit=1)
+        if len(parts) != 2:
+            errprint(f"File {file_path} does not match the expected format")
+            continue
+        num, _ = parts
         num = int(num)
         files[num] = file_path
 
