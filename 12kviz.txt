@@ -1,0 +1,340 @@
+1. Study the following situa4ons. In each of them, which of the main security objec4ves
+are probably not fulﬁlled?
+a. You have selected your favourite red ﬁlament for 3D prin4ng in an e-shop, now
+entering your payment data and receiving an error message: "The transac4on
+could not be completed, your bank is not responding, try later". Conﬁden4ality
+b. You are siIng at a conference, listening to presenta4ons of other researchers
+in the area you are keen on. You see one of them explaining your breakthrough
+ideas you never shared with anyone except that you have submiKed them with
+a recent EU project proposal that happened to be rejected. Conﬁden4ality and
+integrity
+
+c. Yesterday, you have completed the design of your new 3D model with Tinkercad.
+When you have logged into Tinkercad today, you found your model to be
+modiﬁed for unknown reasons. Integrity
+2. An employee in the bank has been preparing 10 years for this beau4ful day. The plan
+was perfect. Some large sum of money has been forgoKen on some unused account probably of a vic4m of a maﬁa war. Now they are safely moved to his private account in
+Belize. Unfortunately, a day aUer, the police knock on the door. You know why because
+you have programmed the informa4on system for this bank. Which property does it
+have?
+-
+
+Non-repudia4on property -> evidence that they transferred money from an
+unused account to private one.
+
+3. System calls are a typical example of a weak point of opera4ng systems. They can be
+used by an adversary to take control over otherwise protected parts of memory,
+hardware, or other resources. It can be done, because an adversary program can oﬀer
+a subs4tute rou4ne to be called when user programs trap to system calls. Your
+comments.
+-
+
+System calls are poten4al weak point in OS -> they can be exploited by adversaries
+to gain control over protected resources -> signiﬁcant security risk
+
+4. Under linux, a user some4mes cannot hear anything when playing music with his
+favorite music player (mplayer program) even though it has speakers connected and
+volume up. This can happen for instance when that user is not member of the audio
+user group. We give him this privilege by adding him to that group. Fill in the following
+generic concepts with en44es for this par4cular situa4on:
+a. Principal -> the user who needs access to the audio func4onality (ex. “John
+Doe”)
+b. Agent -> administra4ve command or ac4on that adds “John Doe” to “audio” user
+group.
+c. Object -> “audio” user group, resource that “John Doe” needs access to in order
+to use audio func4onality
+d. Creden4al -> privileges associated with the “audio” user group (OS checks
+begore gaining access to audio resources)
+5. A ci4zen who was banned from geIng certain kind of permission from regulators
+no4ces that when the clerk in the oﬃce gives this permission to others, they always use
+certain
+
+URL
+
+address
+
+in
+
+this
+
+format:
+
+hKps://permission-
+
+server.gov/give_permission?personal_id=####&type_of_permission=#### Therefore
+he tried to enter this URL to his web browser with his personal_id, and the type of
+permission that he would like to have, but does not. Fortunately, it did not work out,
+because systems obey one of the core security principles? Which one?
+-
+
+principle of least privilege (users and processes should only be given the minimum
+levels of access and permissions necessary to perform their tasks)
+
+6. What is the purpose of salt in hashing passwords process on a typical Linux system?
+-
+
+Linux systems can improve overall security and conﬁden4ality of user creden4als.
+
+7. Provide 6 (in total) meaningful, useful, true and informa4ve sentences about
+*advantages and/or disadvantages* of the three authen4ca4on methods:
+a. by what you know:
+o +: easily remembered and cheap passwords to implement, quick and easy
+authen4ca4on for users
+
+o -: Easy to guess password, dic4onary aKacks and social engineering, weak or
+reused passwords
+b. by what you have:
+o +: addi4onal security (not only usernames and passwords), physical tokens
+o -: imprac4cal to use physical tokens -> can be lost or stolen
+c. by what you are:
+o +: ﬁngerprints, iris paKerns, faceid, diﬃcult to replicate
+o -: cannot be changed like passwords or tokens, harder to use on mul4ple
+devices
+8. When a user is logging in to a Linux desktop system on a text terminal, it sees the login:
+prompt ﬁrst. AUer the user provides his username and password, the login process that
+runs with superuser privileges veriﬁes the entered hashed password against a hashed
+password stored in /etc/shadow ﬁle. If they match, it forks a new process, changes the
+owner of that process to the user that is just logging in and starts a login shell as
+speciﬁed in /etc/passwd ﬁle. Your comments.
+-
+
+Most important part is proper authen4ca4on and access control in the OS. If it is
+done correctly, it ensures the security and integrity of the system
+
+9. Why do we typically start a webserver as some user and not as a root?
+-
+
+If webserver would have full root privileges, some system-wide damage or
+unauthorised changes could occur
+
+10. Somebody wanted to enter a hairdresser during pandemic and pulled out her covidpass so that they let her in. Will her entry permission be based on capabili4es or on
+access control list? Explain why.
+-
+
+Based on capabili4es -> capabili4es work like key in a lock
+
+-
+
+Covid-pass -> capability that grants permission for entry based on certain criteria
+(test results, vaccina4on)
+
+11. What is the rela4on between SSL and TLS and between HTTPS and SSL?
+-
+
+SSL (Secure Socket Layer) and TLS (Transport Layer Security):
+
+o SSL: cryptographic protec4on to communica4ons between processes in
+modern systems
+o TSL: more secure and updated version of SSL, standard method for providing
+secure communica4on over a network
+-
+
+HTTPS (Hypertext Transfer Protocol Secure) and SSL:
+o HTTPS: protocol that supports WWW, takes exis4ng HTTP and connects it to
+SSL or TLS -> ensuring that sensi4ve informa4on transmiKed over the web is
+protected from poten4al security threads
+
+12. What are the diﬀerent ways to authen4cate when using SSH?
+-
+
+Password-based, public-key, A. servers (f.ex Kerberos)
+
+13. A process P on a typical Linux system opens a ﬁle F, then reads from it 3 4mes, and
+ﬁnally closes it. Which of the following was used:
+a. Capabili4es
+b. ACL
+
+14. Suppose you have a family bakery, and diﬀerent people are working there: bakers,
+juniors, cleaning staﬀ and others. Juniors have access to the ﬂour, while bakers can get
+into the cabinet that contains hereditary recipes. In a corona crisis, some bakers were
+ill and trusuul juniors temporarily received the privileges of the bakers un4l they could
+return. How is this access control method called and what basic security principle does
+this preserve?
+-
+
+Role-based access control (RBAC) and basic security principle of least privilege
+
+15. Can a similar access control be achieved somehow in Linux system? Using which
+technique and how does it work?
+-
+
+It can, by Access Control Lists and groups -> feature: privilege escala4on -> allows
+small extensions of privileges
+
+16. What command on Linux could we use to start a process under a diﬀerent user?
+-
+
+sudo -u <username> <command>
+
+17. You have installed some new program on your mobile phone and it asks you to let it use
+your microphone. What data structure will hold the decision of your approval?
+-
+
+Permissions label
+
+18. A browser is accessing a webserver that is providing the content in encrypted form to
+increase security. Why does the server need a cer4ﬁcate?
+-
+
+the server needs a cer4ﬁcate to authen4cate its iden4ty, establish a secure
+encrypted connec4on, ensure data integrity, and build trust with the client browser
+
+19. How can that webserver obtain such cer4ﬁcate?
+-
+
+Generate cer4ﬁcate signing request (CSR)
+
+-
+
+submit the CSR to Cer4ﬁcate authority (CA)
+
+-
+
+valida4on process
+
+-
+
+cer4ﬁcate insurance
+
+-
+
+installa4on on the web server
+
+20. Suppose an adversary would like to cheat the web browser by recording a traﬃc
+between the webserver and the browser ﬁrst and then reusing this recorded
+communica4on to modify the content of the following communica4on. How is such a
+wrongdoing called? What is done to prevent it?
+-
+
+“man-in-the-middle aKack”
+
+-
+
+The adversary posi4ons themselves between the client and server intercepts the
+communica4on and can alter the data being exchanged
+
+-
+
+We can take some measures:
+o Encrypt the communica4on between the client and server
+o Cer4ﬁcate valida4on -> client can detect unauthorised or forget cer4ﬁcates
+o A framework for secure communica4on by using digital cer4ﬁcates and
+public private key pairs
+o SSL/ TLS ->secure communica4on channels by encryp4ng data and ensuring
+data integrity
+
+21. you have ﬁles A, B, C and users X, Y, Z, W. You would like to give read and write access
+to these ﬁles to the users as follows (other users should not have it):
+ﬁle
+
+users to have read access
+
+users who have write access
+
+A
+
+XY
+
+XW
+
+B
+
+XZ
+
+YX
+
+C
+
+YZ
+
+ZW
+
+Can this be done in tradi4onal 9-bit POSIX-like access control? If yes, how, if not why?
+-
+
+It cannot be done, because the access control requirements involve speciﬁc
+combina4ons of users having read and write access to each ﬁle which cannot be
+directly achieved with tradi4onal POSIX model
+
+22. One of the customers of a system you developed has ordered a Christmas tree to be
+brought right to his door using that system. Now he is refusing to pay for it, claiming he
+has not placed the order. However, you are 100% sure that he did that and you can
+provide a proof. It means that your system has the following property: (ﬁll in)
+-
+
+Non-repudia4on
+
+23. You have opened your program and commented-out lines 10-20 in it. Then you saved
+it, compiled it, and run it, surprisingly ﬁnding out that the program s4ll executes those
+instruc4ons at lines 10-20. You open the ﬁle and you see the lines are NOT commentedout. Which property is the system you are using lacking? (ﬁll in)
+-
+
+Integrity property
+
+24. A teacher has developed a special program to tacitly subscribe students to his elec4ve
+course that nobody wanted to register for. Somehow he managed to start and keep that
+program running on a student computer, wai4ng un4l the student will have logged in
+to AIS. AUer that his program would just issue a few needed requests to AIS and the
+student would be silently registered. If this was possible, which core security principle
+was not obeyed by such AIS?
+-
+
+Authoriza4on
+
+25. Under Linux, when you are trying to send a program to Arduino over serial cable, you
+run into a diﬃculty - you are missing the rights to ﬁle /dev/KyUSB0 or similar. When we
+give a user this right, ﬁll in the following generic concepts with en44es in this situa4on:
+a. Principal -> user
+b. Agent ->program / tool
+c. Object -> ﬁle /dev/KyUSB0 or serial port
+d. Creden4al -> permissions or rights
+26. Why does an experienced aKacker who has stolen password ﬁle from a machine you
+use, and who wants to guess your password has an easier job if the "salt" is not used?
+-
+
+By not using a salt when hashing passwords, the security of the passwords is
+weakened, making it easier for aKackers to guess passwords through various
+techniques like dic4onary aKacks, rainbow table lookups, and iden4fying common
+passwords across mul4ple users. Sal4ng passwords adds randomness and
+uniqueness to each hashed password, making it signiﬁcantly harder for aKackers to
+crack passwords even if they have access to the hashed passwords
+
+27. When a user is logging in to a Linux desktop system on a text terminal, it sees the login:
+prompt ﬁrst. AUer the user provides his username and password, the login process
+changes its own user to the provided one so that it can read and verify the hashed
+password from a ﬁle, which is stored in an area that is readable only to that user. Your
+comments.
+-
+
+the process of changing the user to the provided one during login in a Linux system
+enhances security by ensuring secure access to hashed password ﬁles, following the
+principle of least privilege, isola4ng user data, and facilita4ng the authen4ca4on
+veriﬁca4on process
+
+28. What is the main advantage and main disadvantage of using capabili4es instead of ACL?
+-
+
++: Fine-grained control and ﬂexibility in managing access to resources
+
+-
+
+-: they require careful design and handling to ensure that the right set if privileges
+is assigned to each process or entry
+
+29. Capabili4es allow both mandatory and discre4onary access control, whereas ACL allow
+only mandatory. True?
+-
+
+False -> it depends on speciﬁc security requirements and policies of the system
+
+30. Suppose you have a family bakery, and diﬀerent people are working there: bakers,
+juniors, cleaning staﬀ and others. Juniors have access to the ﬂour, while bakers can get
+into the cabinet that contains hereditary recipes. In a corona crisis, some bakers were
+ill and trusuul juniors temporarily received the privileges of the bakers un4l they could
+return. How is this access control method called and what basic security principle does
+this preserve?
+-
+
+Role-based access control, principle of least privilege
+
+
