@@ -1,0 +1,383 @@
+Tu sú odpovede na kvíz na základe poskytnutých materiálov:
+
+-----
+
+**1. Preskúmajte nasledujúce situácie. V každej z nich, ktorý z hlavných bezpečnostných cieľov pravdepodobne nie je splnený?**
+
+**a.**
+Situácia: Vybrali ste si obľúbené červené vlákno na 3D tlač v e-shope, teraz zadávate platobné údaje a dostanete chybovú správu: "Transakcia nemohla byť dokončená, vaša banka neodpovedá, skúste neskôr".
+**Odpoveď:** Dostupnosť (Availability)
+**Vysvetlenie:** Služba (platba) nie je dostupná.
+**Zdroj:** `53-security-intro.pdf`, strana 5, "Availability - If some information or service is supposed to be available for your own or others' use, make sure an attacker cannot prevent its use."
+
+**b.**
+Situácia: Sedíte na konferencii a počúvate prezentácie iných výskumníkov v oblasti, o ktorú sa zaujímate. Vidíte jedného z nich, ako vysvetľuje vaše prelomové nápady, ktoré ste nikdy s nikým nezdieľali, okrem toho, že ste ich predložili s nedávnym návrhom projektu EÚ, ktorý bol zamietnutý.
+**Odpoveď:** Dôvernosť (Confidentiality)
+**Vysvetlenie:** Vaše nápady, ktoré mali zostať tajné, boli zverejnené.
+**Zdroj:** `53-security-intro.pdf`, strana 5, "Confidentiality - If some piece of information is supposed to be hidden from others, don't allow them to find it out."
+
+**c.**
+Situácia: Včera ste dokončili návrh vášho nového 3D modelu s Tinkercad. Keď ste sa dnes prihlásili do Tinkercad, zistili ste, že váš model bol z neznámych dôvodov zmenený.
+**Odpoveď:** Integrita (Integrity)
+**Vysvetlenie:** Váš model bol zmenený bez vášho povolenia.
+**Zdroj:** `53-security-intro.pdf`, strana 5, "Integrity - If some piece of information or component of a system is supposed to be in a particular state, don't allow an adversary to change it."
+
+-----
+
+**2. Zamestnanec v banke sa na tento krásny deň pripravoval 10 rokov. Plán bol dokonalý. Veľká suma peňazí bola zabudnutá na nejakom nepoužívanom účte – pravdepodobne obete mafiánskej vojny. Teraz sú bezpečne presunuté na jeho súkromný účet v Belize. Bohužiaľ, deň po tom, polícia klope na dvere. Viete prečo, pretože ste programovali informačný systém pre túto banku. Akú vlastnosť má?**
+
+**Odpoveď:** Vlastnosť nezapuditeľnosti (Non-repudiation property)
+**Vysvetlenie:** Systém poskytol dôkaz, že zamestnanec previedol peniaze z nepoužívaného účtu na súkromný účet, čím mu znemožnil poprieť túto akciu.
+**Zdroj:** `53-security-intro.pdf`, strana 5, "Another important aspect of security for computer systems is we often want to be sure that when someone told us something, they cannot later deny that they did so."
+
+-----
+
+**3. Systémové volania sú typickým príkladom slabého miesta operačných systémov. Môžu byť použité protivníkom na prevzatie kontroly nad inak chránenými časťami pamäte, hardvéru alebo iných zdrojov. Dá sa to urobiť, pretože program protivníka môže ponúknuť náhradnú rutinu, ktorá sa zavolá, keď používateľské programy „zapadnú“ do systémových volaní. Vaše komentáre.**
+
+**Odpoveď:**
+Systémové volania sú kľúčovým bodom, kde operačný systém (OS) môže uplatňovať kontrolu prístupu a zaisťovať ochranu. OS ich používa na prechod do privilegovaného režimu a rozhoduje, či je požadovaná služba povolená podľa bezpečnostnej politiky systému. Ak je implementácia systémových volaní alebo ich spracovanie v OS chybné, alebo ak je možné vložiť "náhradné rutiny" (napr. pomocou techník ako sú rootkity), systémové volania sa stávajú vážnym bezpečnostným rizikom, ktoré môže viesť k získaniu kontroly nad chránenými zdrojmi. Preto je robustná a bezpečná implementácia systémových volaní a ich sprievodných mechanizmov nevyhnutná pre celkovú bezpečnosť OS.
+
+**Zdroj:** `53-security-intro.pdf`, strana 9, "System calls offer the operating system another opportunity to provide protection." . "The same mechanism gives the operating system the opportunity to check if the requested service should be allowed under the system's security policy." .
+
+-----
+
+**4. Pod Linuxom používateľ niekedy nepočuje nič, keď prehráva hudbu so svojím obľúbeným hudobným prehrávačom (program mplayer), aj keď má pripojené reproduktory a hlasitosť je zapnutá. Môže sa to stať napríklad vtedy, keď používateľ nie je členom skupiny používateľov „audio“. Udelíme mu toto oprávnenie pridaním do tejto skupiny. Vyplňte nasledujúce všeobecné pojmy entitami pre túto konkrétnu situáciu:**
+
+**a. Principal**
+**Odpoveď:** Používateľ (napr. "John Doe"), ktorý potrebuje prístup k audio funkcionalite.
+**Zdroj:** `54-security-authentication.pdf`, strana 1, "Principals are security-meaningful entities that can request access to resources, such as human users, groups of users, or complex software systems."
+
+**b. Agent**
+**Odpoveď:** Program alebo nástroj (napr. program mplayer), ktorý vykonáva požiadavku na audio funkcionalitu v mene používateľa.
+**Zdroj:** `54-security-authentication.pdf`, strana 2, "the process or other active computing entity performing the request on behalf of a principal is often called its agent."
+
+**c. Object**
+**Odpoveď:** Audio funkcionalita alebo zariadenie (napr. `/dev/audio` alebo audio hardvér).
+**Vysvetlenie:** Skupina "audio" je mechanizmus pre prístup, nie samotný objekt prístupu.
+**Zdroj:** `54-security-authentication.pdf`, strana 2, "The request is for access to some particular resource, which we frequently refer to as the object of the access request."
+
+**d. Credential**
+**Odpoveď:** Oprávnenia spojené s členstvom v skupine "audio", ktoré OS kontroluje pred povolením prístupu k audio zdrojom.
+**Zdroj:** `54-security-authentication.pdf`, strana 2, "Any form of data created and managed by the operating system that keeps track of such access decisions for future reference is often called a credential."
+
+-----
+
+**5. Občan, ktorému bolo zakázané získať určité povolenie od regulačných úradov, si všimne, že keď úradník v kancelárii dáva toto povolenie iným, vždy používajú určitú URL adresu vo formáte: [https://permission-server.gov/give\_permission?personal\_id=\#\#\#\#\&type\_of\_permission=\#\#\#\#](https://www.google.com/search?q=https://permission-server.gov/give_permission%3Fpersonal_id%3D%23%23%23%23%26type_of_permission%3D%23%23%23%23) Preto sa pokúsil zadať túto URL do svojho webového prehliadača so svojím `personal_id` a typom povolenia, ktoré by chcel mať, ale nemá. Našťastie to nefungovalo, pretože systémy dodržiavajú jeden z kľúčových bezpečnostných princípov? Ktorý?**
+
+**Odpoveď:** Princíp najmenších oprávnení (Principle of Least Privilege)
+**Vysvetlenie:** Systém zabezpečil, že používateľ mal len minimálne potrebné oprávnenia na vykonávanie svojich úloh a nemohol získať prístup k zdroju, na ktorý nebol autorizovaný.
+**Zdroj:** `53-security-intro.pdf`, strana 8, "Least privilege - Give a user or a process the minimum privileges required to perform the actions you wish to allow."
+
+-----
+
+**6. Aký je účel soli (salt) pri procese hashovania hesiel v typickom systéme Linux?**
+
+**Odpoveď:**
+Účelom soli (salt) je výrazne zvýšiť bezpečnosť hashovaných hesiel. Sôl je veľké náhodné číslo (napríklad 32 alebo 64 bitov), ktoré sa pred hashovaním pripojí k heslu. Tým sa zabráni útoku slovníkom (dictionary attack) pomocou predtým vypočítaných tabuliek (ako sú rainbow tables), pretože útočník už nemôže vytvoriť jednu prekladovú tabuľku hesiel do ich hashov. Namiesto toho musí pre každý ukradnutý hash hesla s unikátnou soľou jednotlivo hashovať každý pokus o heslo so zodpovedajúcou soľou, čo robí útok oveľa nákladnejším a časovo náročnejším.
+
+**Zdroj:** `54-security-authentication.pdf`, strana 8-9, "There's a simple fix: before hashing a new password and storing it in your password file, generate a big random number... and concatenate it to the password. Hash the result and store that... Why does this help? The attacker can no longer create one translation of passwords in the dictionary to their hashes... Instead, for each entry in the stolen password file, the dictionary attack must freshly hash each guess with the password's salt."
+
+-----
+
+**7. Poskytnite 6 (spolu) zmysluplných, užitočných, pravdivých a informatívnych viet o výhodách a/alebo nevýhodách troch metód autentifikácie:**
+
+**a. podľa toho, čo viete (napr. heslo):**
+
+  * **Výhoda:** Sú ľahko zapamätateľné a lacné na implementáciu, poskytujú rýchlu a jednoduchú autentifikáciu pre používateľov.
+  * **Nevýhoda:** Sú náchylné na útoky slovníkom a sociálne inžinierstvo, a to najmä, ak sú heslá slabé alebo opakovane použité.
+
+**b. podľa toho, čo máte (napr. token, čipová karta):**
+
+  * **Výhoda:** Poskytujú dodatočnú úroveň zabezpečenia, pretože vyžadujú fyzickú držbu tokenu, nielen znalosť hesla.
+  * **Nevýhoda:** Fyzické tokeny môžu byť stratené alebo ukradnuté, čo vedie k problémom s prístupom pre legitímneho používateľa a potenciálnym zneužitiam.
+
+**c. podľa toho, čo ste (napr. odtlačok prsta, rozpoznávanie tváre):**
+
+  * **Výhoda:** Biometrické vlastnosti ako odtlačky prstov, dúhovka alebo rozpoznávanie tváre sú ťažko replikovateľné a jedinečné pre každú osobu.
+  * **Nevýhoda:** Tieto vlastnosti sa nedajú zmeniť ako heslá alebo tokeny a systémy majú chyby v rozpoznávaní (false positives a false negatives).
+
+-----
+
+**8. Keď sa používateľ prihlasuje do desktopového systému Linux na textovom termináli, najprv uvidí výzvu `login:`. Po tom, ako používateľ zadá svoje používateľské meno a heslo, proces prihlásenia, ktorý beží s privilegovanými právami superužívateľa, overí zadané hashované heslo proti hashovanému heslu uloženému v súbore `/etc/shadow`. Ak sa zhodujú, vytvorí (forkne) nový proces, zmení vlastníka tohto procesu na používateľa, ktorý sa práve prihlasuje, a spustí prihlasovací shell, ako je špecifikované v súbore `/etc/passwd`. Vaše komentáre.**
+
+**Odpoveď:**
+Popísaný proces prihlásenia v systéme Linux je štandardný a predstavuje dôležitú súčasť jeho bezpečnostného modelu. Kľúčovým prvkom je, že počiatočný proces prihlásenia beží s privilegovanými právami (superužívateľ), aby mohol bezpečne čítať hashované heslá zo súboru `/etc/shadow`, ktorý je prístupný iba pre root. Po úspešnej autentifikácii proces prihlásenia *zníži svoje oprávnenia* tým, že zmení svoje UID na prihláseného používateľa pre nový forknutý proces (užívateľský shell). Toto dodržiava princíp najmenších oprávnení (Principle of Least Privilege), pretože používateľské procesy potom bežia s minimálnymi potrebnými oprávneniami, čím sa znižuje potenciálny rozsah poškodenia v prípade kompromitácie používateľského procesu.
+
+**Zdroj:** `54-security-authentication.pdf`, strana 10, "A special login process running under a privileged system identity displays a prompt... The login process looks up the name the user provided in the password file... Also, the login process finds the salt and the salted, hashed version of the correct password for this user, which are permanently stored in a secure place in the system... If they do match, fork a process. Set the user and group of the forked process to the values determined earlier, which the privileged identity of the login process is permitted to do."
+
+-----
+
+**9. Prečo zvyčajne spúšťame webový server ako nejakého používateľa a nie ako root?**
+
+**Odpoveď:**
+Webový server sa typicky spúšťa ako neprivilegovaný používateľ (napr. `www-data` alebo `apache`) a nie ako `root`, aby sa minimalizovalo potenciálne poškodenie v prípade, že by bol server napadnutý. Ak by bol webový server spustený s plnými právami `root`, útočník, ktorý by ho kompromitoval, by získal neobmedzenú kontrolu nad celým systémom, čo by mohlo viesť k systémovým zmenám, úniku citlivých dát alebo iným neoprávneným akciám. Spustenie ako neprivilegovaný používateľ je aplikáciou princípu najmenších oprávnení.
+
+**Zdroj:** `53-security-intro.pdf`, strana 8, "Least privilege - Give a user or a process the minimum privileges required to perform the actions you wish to allow. The more privileges you give to a party, the greater the danger that they will abuse those privileges."
+
+-----
+
+**10. Niekto chcel počas pandémie vstúpiť do kaderníctva a vytiahol svoj covid-pas, aby ho vpustili. Bude jej povolenie na vstup založené na "capabilities" alebo na "access control list"? Vysvetlite prečo.**
+
+**Odpoveď:**
+Jej povolenie na vstup bude založené na **capabilities** (schopnostiach).
+**Vysvetlenie:** Covid-pas funguje ako "kľúč v zámku" alebo "vstupenka". Ide o niečo, čo osoba *má* a *predloží* na získanie prístupu. Systémy založené na capabilities fungujú na princípe, že ak subjekt (v tomto prípade osoba s covid-pasom) vlastní požadovanú schopnosť (pas), je mu prístup povolený. Naopak, pri Access Control List (ACL) by strážca (bouncer) kontroloval zoznam povolených osôb. V tomto prípade je prístup povolený na základe *držby* konkrétnej entity (covid-pasu), čo priamo zodpovedá konceptu capabilities.
+
+**Zdroj:** `55-security-access.pdf`, strana 4, "Early computer scientists decided to call the approach that's kind of like locks and keys a capability-based system, while the approach based on the bouncer and the list of those to admit was called an access control list system. Capabilities are thus like keys, or tickets to a movie, or tokens that let you ride a subway. Access control lists are thus like, well, lists."
+
+-----
+
+**11. Aký je vzťah medzi SSL a TLS a medzi HTTPS a SSL?**
+
+**Odpoveď:**
+
+  * **SSL (Secure Socket Layer) a TLS (Transport Layer Security):**
+
+      * SSL bol pôvodný protokol navrhnutý na zabezpečenie komunikácie medzi procesmi.
+      * TLS je novšia, bezpečnejšia a aktualizovaná verzia SSL. SSL je formálne považovaný za nebezpečný a nemal by sa používať, namiesto neho by sa mal používať TLS.
+
+  * **HTTPS (Hypertext Transfer Protocol Secure) a SSL:**
+
+      * HTTPS je protokol, ktorý podporuje World Wide Web a zabezpečuje existujúci HTTP protokol pripojením k SSL alebo TLS. Tým sa zabezpečuje, že citlivé informácie prenášané cez web sú chránené pred potenciálnymi bezpečnostnými hrozbami.
+
+**Zdroj:** `57-security-distributed.pdf`, strana 8 pre SSL/TLS a strana 14 pre HTTPS .
+
+-----
+
+**12. Aké sú rôzne spôsoby autentifikácie pri používaní SSH?**
+
+**Odpoveď:**
+Pri používaní SSH sú hlavné spôsoby autentifikácie:
+
+  * **Autentifikácia na základe hesla:** Klienti zadávajú používateľské meno a heslo.
+  * **Autentifikácia pomocou verejného kľúča:** SSH sa spolieha na kryptografiu s verejným kľúčom a certifikáty na autentifikáciu vzdialených serverov (a voliteľne klientov).
+  * **Autentifikácia prostredníctvom autentifikačných serverov:** SSH podporuje aj iné možnosti, ktoré nie sú založené na certifikátoch alebo heslách, ako napríklad použitie autentifikačných serverov (napríklad Kerberos).
+
+**Zdroj:** `57-security-distributed.pdf`, strana 15 .
+
+-----
+
+**13. Proces P v typickom systéme Linux otvorí súbor F, potom z neho 3-krát číta a nakoniec ho zatvorí. Ktoré z nasledujúcich boli použité:**
+
+**a. Capabilities**
+**b. ACL**
+
+**Odpoveď:**
+Boli použité **oba** mechanizmy, **ACL** aj **Capabilities**.
+**Vysvetlenie:** Pri počiatočnom otvorení súboru (volanie `open()`) systém Linux používa **ACL** (Access Control Lists) na kontrolu, či je používateľ oprávnený prístupovať k súboru. Ak je `open()` úspešné, Linux vytvorí internú dátovú štruktúru (ktorá funguje ako capability) pre tento proces, ktorá označuje, že proces má oprávnenia na čítanie a zápis do tohto súboru. Pri následných operáciách čítania (`read()`) už OS nekontroluje ACL súboru, ale namiesto toho konzultuje túto capability uloženú v PCB procesu. Po zatvorení súboru (volanie `close()`) sa táto capability-like štruktúra odstráni.
+
+**Zdroj:** `55-security-access.pdf`, strana 11, "in a typical Linux system, that open() call we were discussing uses ACLs for access control. However, assuming the Linux open() was successful, as long as the process keeps the file open, the ACL is not examined on subsequent reads and writes. Instead, Linux creates a data structure that amounts to a capability indicating that the process has read and write privileges for that file... On each read or write operation, the OS can simply consult this data structure..."
+
+-----
+
+**14. Predstavte si, že máte rodinnú pekáreň a pracujú tam rôzni ľudia: pekári, juniori, upratovači a iní. Juniori majú prístup k múke, zatiaľ čo pekári sa môžu dostať do skrine, ktorá obsahuje dedičné recepty. Počas koronakrízy niektorí pekári ochoreli a dôveryhodní juniori dočasne získali privilégia pekárov, kým sa pekári nemohli vrátiť. Ako sa nazýva táto metóda riadenia prístupu a aký základný bezpečnostný princíp sa tým zachováva?**
+
+**Odpoveď:**
+Táto metóda riadenia prístupu sa nazýva **Riadenie prístupu na základe rolí (Role-Based Access Control – RBAC)**.
+**Zachovávaný princíp:** Princíp najmenších oprávnení (Principle of Least Privilege).
+**Vysvetlenie:** Prístup je organizovaný na základe rolí ("pekári", "juniori"), pričom každá rola má priradený špecifický súbor oprávnení. Dočasné udelenie privilegov pekárov juniorom je typickým príkladom RBAC. Princíp najmenších oprávnení je zachovaný, pretože juniori získali len tie privilégia, ktoré boli nevyhnutné na dočasné plnenie úloh pekárov, a očakáva sa, že ich po návrate pekárov stratia.
+
+**Zdroj:** `55-security-access.pdf`, strana 14, "This observation led to the development of Role-Based Access Control, or RBAC. The core ideas had been around for some time before they were more formally laid out in a research paper by Ferraiolo and Kuhn [FK92]." a "Remember the principle of least privilege: when you give someone access to something, you are relying not just on their honesty, but on their caution."
+
+-----
+
+**15. Dá sa podobné riadenie prístupu dosiahnuť aj v systéme Linux? Akou technikou a ako to funguje?**
+
+**Odpoveď:**
+Áno, podobné riadenie prístupu sa dá dosiahnuť v systéme Linux pomocou **Access Control Lists (ACLs) a skupín** v kombinácii s **eskaláciou privilégií**.
+**Technika a fungovanie:**
+Linux a podobné OS majú funkciu nazvanú **eskalácia privilégií**, ktorá umožňuje kontrolované rozšírenie oprávnení. Konkrétne sa to dosahuje pomocou:
+
+  * **`setuid` bitu:** Program môže byť označený bitom `setuid`, čo mu umožní spustiť sa s oprávneniami používateľa, ktorý je vlastníkom programu (napríklad `root`), a nie používateľa, ktorý ho spustil. Oprávnenia sú platné len počas behu programu.
+  * **`sudo` príkazu:** Príkaz `sudo` umožňuje oprávneným používateľom spustiť špecifické programy pod inou identitou (napríklad ako iný používateľ alebo `root`), pričom je zvyčajne potrebná nová autentifikácia používateľa, ktorý `sudo` spustil.
+    Tieto mechanizmy umožňujú vytvoriť minimalistický RBAC systém definovaním umelých používateľov pre roly a priradením oprávnení, pričom programy pre tieto roly sú spustené pomocou `setuid` alebo `sudo`.
+
+**Zdroj:** `55-security-access.pdf`, strana 15, "One can build a very minimal RBAC system under Linux and similar OSes using ACLs and groups. These systems have a feature in their access control mechanism called privilege escalation." a "In Unix and Linux systems, this feature is called setuid..." a "The Linux sudo command... offers this kind of functionality..." .
+
+-----
+
+**16. Aký príkaz v Linuxe by sme mohli použiť na spustenie procesu pod iným používateľom?**
+
+**Odpoveď:**
+`sudo -u <meno_používateľa> <príkaz>`
+**Vysvetlenie:** Tento príkaz spustí `<príkaz>` s oprávneniami používateľa špecifikovaného v `<meno_používateľa>`.
+**Zdroj:** `54-security-authentication.pdf`, strana 16, "sudo -u webserver apache2" a `55-security-access.pdf`, strana 16, "sudo -u Programmer install newprogram" .
+
+-----
+
+**17. Nainštalovali ste si nový program na mobilný telefón a žiada vás, aby ste mu povolili používať mikrofón. Aká dátová štruktúra bude obsahovať rozhodnutie o vašom schválení?**
+
+**Odpoveď:**
+Dátová štruktúra, ktorá bude obsahovať rozhodnutie o vašom schválení, sa nazýva **Permission Label** (etiketa povolení).
+**Vysvetlenie:** V systémoch ako Android, používatelia pri inštalácii aplikácie alebo počas jej používania schvaľujú konkrétne oprávnenia (napr. prístup k mikrofónu). Tieto oprávnenia sú zakódované v dátovej štruktúre nazývanej "permission label", ktorá určuje, k čomu má aplikácia prístup a čo poskytuje iným.
+
+**Zdroj:** `55-security-access.pdf`, strana 13, "The data structure used to encode this access information is called a permission label."
+
+-----
+
+**18. Prehliadač pristupuje k webovému serveru, ktorý poskytuje obsah v šifrovanej forme na zvýšenie bezpečnosti. Prečo server potrebuje certifikát?**
+
+**Odpoveď:**
+Server potrebuje certifikát pre viacero dôležitých účelov:
+
+1.  **Autentifikácia identity servera:** Certifikát obsahuje verejný kľúč servera a informácie o jeho identite (napr. názov domény). Je digitálne podpísaný dôveryhodnou treťou stranou (certifikačnou autoritou – CA). Prehliadač môže overiť tento podpis pomocou verejného kľúča CA (predinštalovaného v prehliadači), čím si overí, že komunikuje so skutočným serverom, a nie s podvodníkom.
+2.  **Zabezpečenie výmeny kľúčov:** Certifikát obsahuje verejný kľúč servera, ktorý sa používa na bezpečnú výmenu symetrického šifrovacieho kľúča medzi prehliadačom a serverom (napr. pomocou Diffie-Hellman výmeny kľúčov). Tento symetrický kľúč sa potom používa na šifrovanie a dešifrovanie všetkej následnej komunikácie.
+3.  **Zaistenie dôvernosti a integrity dát:** Šifrovaná komunikácia zabezpečuje dôvernosť (aby ju nikto nečítal) a integritu (aby ju nikto nezmenil). Bez overenia identity servera (poskytnutej certifikátom) by útočník mohol predstierať, že je server, a odchytiť alebo zmeniť komunikáciu.
+
+**Zdroj:** `57-security-distributed.pdf`, strana 4, "The signed bundle of bits is called a certificate. Essentially, it contains information about the party that owns the public key, the public key itself, and other information, such as an expiration date." a "If you obtain a copy of the certificate, and can check the signature, you can learn someone else's public key, even if you have never met or had any direct interaction with them." . Strana 9, "SSL will get on with its main business: authenticating at least the server (optionally the client), creating and distributing a new symmetric key, and running the communication through the chosen cipher using that key."
+
+-----
+
+**19. Ako môže tento webový server získať takýto certifikát?**
+
+**Odpoveď:**
+Webový server môže získať certifikát nasledujúcim spôsobom:
+
+1.  **Generovanie Žiadosti o podpis certifikátu (CSR):** Webový server vygeneruje pár kľúčov (verejný a súkromný) a vytvorí Žiadosť o podpis certifikátu (CSR). CSR obsahuje verejný kľúč servera a identifikačné informácie (napr. názov domény). Súkromný kľúč si server ponechá v tajnosti.
+2.  **Odoslanie CSR certifikačnej autorite (CA):** Server odošle CSR dôveryhodnej certifikačnej autorite (CA), ktorá je známa vydávaním certifikátov. Často za túto službu zaplatí poplatok.
+3.  **Overovací proces CA:** CA overí identitu žiadateľa (servera/organizácie), aby sa uistila, že je oprávnený požiadať o certifikát pre danú doménu. To môže zahŕňať rôzne metódy overenia (napr. kontrolu vlastníctva domény, overenie identity organizácie).
+4.  **Vydanie certifikátu:** Ak je overenie úspešné, CA vezme informácie z CSR, digitálne ich podpíše svojím vlastným súkromným kľúčom a vytvorí digitálny certifikát.
+5.  **Inštalácia certifikátu na webový server:** Server dostane vydaný certifikát a nainštaluje ho do svojho softvéru (napr. webového servera Apache, Nginx).
+
+**Zdroj:** `57-security-distributed.pdf`, strana 4, popisuje, ako Frobazz Inc. získava certifikát od AcmeSign Co. (CA): "Acmesign checks up on Frobazz Inc. to ensure that the people asking for the certificate actually are legitimate representatives of Frobazz. Acmesign then makes very, very sure that the public key it's about to embed in a certificate actually is the one that Frobazz wants to use. Assuming it is, Acmesign runs a cryptographic hashing algorithm... and encrypts HF with its own private key... into the certificate CF..."
+
+-----
+
+**20. Predstavte si, že by útočník chcel oklamať webový prehliadač tak, že by najprv zaznamenal komunikáciu medzi webovým serverom a prehliadačom a potom túto zaznamenanú komunikáciu znova použil na modifikáciu obsahu nasledujúcej komunikácie. Ako sa takýto neprávny čin nazýva? Čo sa robí, aby sa tomu predišlo?**
+
+**Odpoveď:**
+Tento typ útoku sa nazýva **Man-in-the-Middle (MITM) útok** (útok typu "človek v strede") a opakované použitie zaznamenanej komunikácie sa nazýva **útok znovupoužitia (replay attack)**.
+
+**Vysvetlenie a prevencia:**
+
+  * **Man-in-the-Middle (MITM) útok:** Útočník sa umiestni medzi klienta a server, zachytáva komunikáciu a môže ju meniť alebo vkladať nové správy bez vedomia strán.
+  * **Útok znovupoužitia (Replay attack):** Útočník skopíruje legitímnu správu odoslanú v minulosti a odošle ju znova neskôr, aby dosiahol neoprávnené akcie.
+
+**Prevencia:**
+
+  * **Šifrovanie komunikácie (SSL/TLS):** Komunikácia medzi klientom a serverom je šifrovaná pomocou protokolov ako SSL/TLS. To zabraňuje útočníkom čítať alebo zmysluplne meniť dáta.
+  * **Overovanie identity:** Používajú sa certifikáty a mechanizmy na autentifikáciu servera (a voliteľne aj klienta), aby sa zabezpečilo, že obe strany komunikujú so správnym subjektom a nie s útočníkom.
+  * **Unikátne informácie v správach (Nonce/Timestamp):** Každá šifrovaná správa obsahuje unikátne informácie (napr. nonce – číslo použité raz, alebo časovú pečiatku), ktoré zaisťujú, že útok znovupoužitia bude detekovaný, pretože stará správa s už použitým "nonce" alebo zastaranou časovou pečiatkou bude odmietnutá. Tento mechanizmus je zabudovaný do štandardných kryptografických protokolov ako TLS.
+
+**Zdroj:** `57-security-distributed.8`, strana 6, o replay útokoch: "So usually we take measures to ensure that we're not being subjected to a replay attack. Such measures generally involve ensuring that each encrypted message contains unique information not in any other message. This feature is built in properly to standard cryptographic protocols..." . Strana 15-16, o Man-in-the-Middle útokoch: "A typical use of SSH provides a good example of a common general kind of network security vulnerability called a man-in-the-middle attack. This kind of attack occurs when two parties think they are communicating directly, but actually are communicating through a malicious third party without knowing it." .
+
+-----
+
+**21. Máte súbory A, B, C a používateľov X, Y, Z, W. Chceli by ste udeliť prístup na čítanie a zápis k týmto súborom používateľom takto (ostatní používatelia by ho nemali mať):**
+
+| súbor | používatelia na čítanie | používatelia na zápis |
+|-------|------------------------|-----------------------|
+| A     | XY                     | XW                    |
+| B     | YX                     | XZ                    |
+| C     | YZ                     | ZW                    |
+
+**Dá sa to urobiť v tradičnom 9-bitovom POSIX-like riadení prístupu? Ak áno, ako, ak nie, prečo?**
+
+**Odpoveď:**
+**Nedá sa to urobiť** v tradičnom 9-bitovom POSIX-like riadení prístupu.
+
+**Vysvetlenie:**
+Tradičný 9-bitový POSIX model oprávnení (rwx pre vlastníka, skupinu a ostatných) je príliš obmedzený na to, aby vyjadril takúto detailnú a špecifickú kombináciu prístupových práv.
+
+  * Každý súbor má len jedného vlastníka a jednu skupinu.
+  * Oprávnenia pre "ostatných" (others) sa vzťahujú na všetkých používateľov, ktorí nie sú vlastníkom ani členmi priradenej skupiny.
+    V tabuľke sú pre súbory A, B a C uvedené špecifické kombinácie používateľov s právami na čítanie a zápis, ktoré si vyžadujú individuálne prístupové práva pre viacerých používateľov a súčasne rôzne práva na čítanie a zápis pre rôznych ne-vlastníkov. Napríklad pre súbor A: X má čítanie/zápis, Y má čítanie a W má zápis. To nie je možné vyjadriť iba jedným vlastníkom, jednou skupinou a oprávneniami pre ostatných. Bolo by potrebné, aby Y a W mali na rovnakom súbore rôzne práva, čo POSIX nepodporuje.
+
+**Zdroj:** `55-security-access.pdf`, strana 6, "In fact, when they worked it out, they figured they could afford about nine bits for each file's ACL... They thought about their problem and figured out that there were effectively three modes of access they cared about (read, write, and execute, for most files), and they could handle most security policies with only three entries on each access control list. One is the owner of the file... One is the members of a particular group or users... The final one is everybody else..." .
+
+-----
+
+**22. Jeden z klientov systému, ktorý ste vyvinuli, si objednal vianočný stromček, aby mu ho systém priviezol priamo k dverám. Teraz odmieta zaň zaplatiť s tým, že si ho neobjednal. Vy ste si však na 100 % istí, že to urobil, a môžete poskytnúť dôkaz. Znamená to, že váš systém má nasledujúcu vlastnosť: (doplňte)**
+
+**Odpoveď:** Nezastupiteľnosť / Nezmazateľnosť (Non-repudiation)
+**Vysvetlenie:** Systém zaznamenal akciu používateľa takým spôsobom, že používateľ nemôže poprieť jej vykonanie, pretože existuje dôkaz.
+**Zdroj:** `53-security-intro.pdf`, strana 5, "Another important aspect of security for computer systems is we often want to be sure that when someone told us something, they cannot later deny that they did so."
+
+-----
+
+**23. Otvorili ste svoj program a zakomentovali ste riadky 10-20. Potom ste ho uložili, skompilovali a spustili, prekvapivo ste zistili, že program stále vykonáva inštrukcie na riadkoch 10-20. Otvoríte súbor a vidíte, že riadky NIE sú zakomentované. Akú vlastnosť systém, ktorý používate, nemá? (doplňte)**
+
+**Odpoveď:** Integrita (Integrity)
+**Vysvetlenie:** Systém nedokázal udržať dáta (váš súbor s programom) v očakávanom stave; došlo k neautorizovanej alebo nevysvetliteľnej zmene, ktorá narušila spoľahlivosť dát.
+**Zdroj:** `53-security-intro.pdf`, strana 5, "Integrity - If some piece of information or component of a system is supposed to be in a particular state, don't allow an adversary to change it."
+
+-----
+
+**24. Učiteľ vyvinul špeciálny program, aby tajne prihlásil študentov do svojho voliteľného predmetu, na ktorý sa nikto nechcel prihlásiť. Nejako sa mu podarilo spustiť a udržať program bežiaci na študentskom počítači, čakajúc, kým sa študent prihlási do AIS. Potom by jeho program len vydal niekoľko potrebných požiadaviek do AIS a študent by bol potichu zaregistrovaný. Ak by to bolo možné, ktorý základný bezpečnostný princíp nebol dodržaný takýmto AIS?**
+
+**Odpoveď:** Autorizácia (Authorization)
+**Vysvetlenie:** AIS nedodržal princíp autorizácie, pretože neoveril správne, či program (agent) konajúci v mene študenta má oprávnenie na vykonanie takejto akcie (prihlásenie na kurz) bez explicitného súhlasu alebo interakcie študenta. Útok by mohol prebehnúť len vtedy, ak by program automaticky získal autorizáciu na vykonanie operácií, na ktoré nie je legitímne oprávnený.
+
+**Zdroj:** `55-security-access.pdf`, strana 2, "We sometimes refer to the process of determining if a particular subject is allowed to perform a particular form of access on a particular object as authorization."
+
+-----
+
+**25. V systéme Linux, keď sa pokúšate poslať program do Arduina cez sériový kábel, narazíte na problém – chýbajú vám práva k súboru `/dev/ttyUSB0` alebo podobnému. Keď používateľovi udelíme toto právo, vyplňte nasledujúce všeobecné pojmy entitami v tejto situácii:**
+
+**a. Principal**
+**Odpoveď:** Používateľ, ktorý potrebuje prístup k sériovému portu.
+**Zdroj:** `54-security-authentication.pdf`, strana 1, "Principals are security-meaningful entities that can request access to resources, such as human users, groups of users, or complex software systems."
+
+**b. Agent**
+**Odpoveď:** Program/nástroj (napr. `arduino-cli`, `minicom`), ktorý sa pokúša odoslať program do Arduina.
+**Zdroj:** `54-security-authentication.pdf`, strana 2, "the process or other active computing entity performing the request on behalf of a principal is often called its agent."
+
+**c. Object**
+**Odpoveď:** Sériový port alebo súbor zariadenia `/dev/ttyUSB0`.
+**Zdroj:** `54-security-authentication.pdf`, strana 2, "The request is for access to some particular resource, which we frequently refer to as the object of the access request."
+
+**d. Credential**
+**Odpoveď:** Oprávnenia alebo práva, ktoré sú udelené používateľovi pre prístup k `/dev/ttyUSB0`.
+**Zdroj:** `54-security-authentication.pdf`, strana 2, "Any form of data created and managed by the operating system that keeps track of such access decisions for future reference is often called a credential."
+
+-----
+
+**26. Prečo má skúsený útočník, ktorý ukradol súbor s heslami z počítača, ktorý používate, a ktorý chce uhádnuť vaše heslo, ľahšiu prácu, ak sa nepoužije „soľ“?**
+
+**Odpoveď:**
+Ak sa pri hashovaní hesiel nepoužije „soľ“ (salt), útočník má ľahšiu prácu, pretože môže vopred vypočítať a uložiť hashe bežných hesiel (vytvoriť "rainbow table" alebo "slovník hashov"). Bez soli sú všetky hashe rovnakého hesla identické. Keď útočník ukradne súbor s hashovanými heslami, môže jednoducho porovnať ukradnuté hashe s touto predpočítanou tabuľkou. Použitie soli znamená, že každé heslo (aj to isté heslo pre rôznych používateľov) bude mať iný hash, pretože sa k nemu pripojí náhodná soľ. Tým sa znemožňuje použitie predpočítaných tabuliek a útočník musí hashovať každý pokus o heslo pre každého používateľa zvlášť, čo je výpočtovo oveľa nákladnejšie a časovo náročnejšie.
+
+**Zdroj:** `54-security-authentication.pdf`, strana 8-9, "Why does this help? The attacker can no longer create one translation of passwords in the dictionary to their hashes. What is needed is one translation for every possible salt, since the password files that were stolen are likely to have a different salt for every password... Instead, for each entry in the stolen password file, the dictionary attack must freshly hash each guess with the password's salt."
+
+-----
+
+**27. Keď sa používateľ prihlasuje do desktopového systému Linux na textovom termináli, najprv uvidí výzvu `login:`. Po tom, ako používateľ zadá svoje používateľské meno a heslo, proces prihlásenia zmení svojho vlastného používateľa na poskytnutého používateľa, aby mohol čítať a overiť hashované heslo zo súboru, ktorý je čitateľný iba pre tohto používateľa. Vaše komentáre.**
+
+**Odpoveď:**
+Vyhlásenie, že "proces prihlásenia zmení svojho vlastného používateľa na poskytnutého používateľa, aby mohol čítať a overiť hashované heslo zo súboru, ktorý je čitateľný iba pre tohto používateľa", je zavádzajúce.
+V skutočnosti proces prihlásenia v Linuxe začína s privilegovanými právami (`root` UID). Súbor s hashovanými heslami (`/etc/shadow`) je čitateľný **iba pre užívateľa root**, nie pre bežného používateľa. Proces prihlásenia využíva svoje `root` oprávnenia na prístup k tomuto súboru a overenie zadaného hesla. Až **po úspešnom overení hesla** a pred spustením používateľského shellu proces prihlásenia vytvorí nový proces (`fork`) a zmení efektívne a skutočné používateľské ID tohto nového procesu na ID práve prihláseného používateľa. Týmto krokom sa uplatňuje princíp najmenších oprávnení, pretože používateľský shell a všetky ním spustené procesy už bežia s neprivilegovanými právami, čím sa minimalizuje potenciálne poškodenie v prípade kompromitácie.
+
+**Zdroj:** `54-security-authentication.pdf`, strana 10, "A special login process running under a privileged system identity displays a prompt..." a "The login process looks up the name the user provided in the password file... Also, the login process finds the salt and the salted, hashed version of the correct password for this user, which are permanently stored in a secure place in the system." a "If they do match, fork a process. Set the user and group of the forked process to the values determined earlier, which the privileged identity of the login process is permitted to do."
+
+-----
+
+**28. Aká je hlavná výhoda a hlavná nevýhoda používania "capabilities" namiesto ACL?**
+
+**Odpoveď:**
+
+  * **Hlavná výhoda Capabilities:** Umožňujú jednoduché vytváranie procesov s obmedzenými privilégiami. Rodičovský proces môže dieťaťu odovzdať len podmnožinu vlastných oprávnení, čo je ťažšie dosiahnuť s ACL bez zložitého nastavenia nových entít.
+  * **Hlavná nevýhoda Capabilities:** Je zložité určiť kompletnú sadu subjektov, ktoré majú prístup k danému zdroju, pretože by bolo potrebné skontrolovať zoznamy schopností všetkých subjektov v systéme. Rovnako je náročnejšie riešiť problém odvolania oprávnení a zabrániť falšovaniu capabilities.
+
+**Zdroj:** `55-security-access.pdf`, strana 10 pre výhody a nevýhody .
+
+-----
+
+**29. Capabilities umožňujú mandátnu aj diskrečnú kontrolu prístupu, zatiaľ čo ACL umožňujú len mandátnu. Pravda?**
+
+**Odpoveď:**
+**Nepravda.**
+**Vysvetlenie:** Výber medzi diskrečnou (discretionary) a mandátnou (mandatory) kontrolou prístupu je **ortogonálny** k tomu, či sa používajú ACL (Access Control Lists) alebo capabilities (schopnosti). Inými slovami, oba mechanizmy (ACL aj capabilities) môžu byť použité na implementáciu diskrečných aj mandátnych prístupových politík, hoci ACL sú historicky a prakticky viac spájané s diskrečnou kontrolou. Mandátny systém kontroly prístupu môže obsahovať aj diskrečné prvky, ktoré umožňujú ďalšie sprísnenie (nie uvoľnenie) mandátnych kontrol.
+
+**Zdroj:** `55-security-access.pdf`, strana 12, "The choice of discretionary or mandatory access control is orthogonal to whether you use ACLs or capabilities, and is often independent of other aspects of the access control mechanism, such as how access information is stored and handled."
+
+-----
+
+**30. Predstavte si, že máte rodinnú pekáreň a pracujú tam rôzni ľudia: pekári, juniori, upratovači a iní. Juniori majú prístup k múke, zatiaľ čo pekári sa môžu dostať do skrine, ktorá obsahuje dedičné recepty. Počas koronakrízy niektorí pekári ochoreli a dôveryhodní juniori dočasne získali privilégia pekárov, kým sa pekári nemohli vrátiť. Ako sa nazýva táto metóda riadenia prístupu a aký základný bezpečnostný princíp sa tým zachováva?**
+
+**Odpoveď:**
+Táto metóda riadenia prístupu sa nazýva **Riadenie prístupu na základe rolí (Role-Based Access Control – RBAC)**.
+**Zachovávaný princíp:** Princíp najmenších oprávnení (Principle of Least Privilege).
+**Vysvetlenie:** Prístup je organizovaný na základe rolí ("pekári", "juniori"), pričom každá rola má priradený špecifický súbor oprávnení. Dočasné udelenie privilegov pekárov juniorom je typickým príkladom RBAC. Princíp najmenších oprávnení je zachovaný, pretože juniori získali len tie privilégia, ktoré boli nevyhnutné na dočasné plnenie úloh pekárov, a očakáva sa, že ich po návrate pekárov stratia.
+
+**Zdroj:** `55-security-access.pdf`, strana 14, "This observation led to the development of Role-Based Access Control, or RBAC. The core ideas had been around for some time before they were more formally laid out in a research paper by Ferraiolo and Kuhn [FK92]." a "Remember the principle of least privilege: when you give someone access to something, you are relying not just on their honesty, but on their caution."
+
+-----
